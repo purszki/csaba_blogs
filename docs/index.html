@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Csaba Purszki &mdash; Personal Blog</title>
+  <meta name="description" content="Personal blog of Csaba Purszki: C++ systems engineer, Bitcoin protocol research, automotive computer vision." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f5ef;
+      --paper: #fffdfa;
+      --ink: #22201a;
+      --muted: #6a6257;
+      --line: #dfd8cb;
+      --accent: #8a5b2a;
+      --accent-soft: #efe4d7;
+      --shadow: 0 20px 45px rgba(45, 32, 16, 0.09);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Source Sans 3", "Trebuchet MS", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, #f2e7d8 0%, transparent 42%),
+        radial-gradient(circle at 90% 0%, #efe7dc 0%, transparent 35%),
+        var(--bg);
+      line-height: 1.65;
+    }
+
+    .container {
+      width: min(1100px, 92vw);
+      margin: 3rem auto;
+    }
+
+    .hero {
+      background: linear-gradient(145deg, #fffdfa 0%, #f8f2e7 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2.5rem;
+      animation: rise 650ms ease-out;
+      position: relative;
+    }
+
+    h1, h2, h3 {
+      font-family: "Fraunces", Georgia, serif;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      margin: 0 0 0.85rem;
+    }
+
+    h2 {
+      font-size: clamp(1.4rem, 2.2vw, 2rem);
+      margin: 0 0 0.8rem;
+    }
+
+    h3 {
+      font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+      margin: 1.4rem 0 0.55rem;
+      color: #4a3720;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 70ch;
+      margin: 0;
+    }
+
+    .meta-line {
+      margin: 0 0 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    nav.toc {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    nav.toc a {
+      text-decoration: none;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid #e0cfbc;
+      padding: 0.45rem 0.75rem;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: transform 160ms ease, background 160ms ease;
+    }
+
+    nav.toc a:hover {
+      background: #e8d8c3;
+      transform: translateY(-1px);
+    }
+
+    article {
+      margin-top: 1.6rem;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(1.2rem, 2.4vw, 2.4rem);
+      animation: rise 900ms ease-out;
+    }
+
+    section + section {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--line);
+    }
+
+    p, ul, ol {
+      margin: 0.65rem 0;
+      max-width: 78ch;
+    }
+
+    ul, ol {
+      padding-left: 1.3rem;
+    }
+
+    li + li {
+      margin-top: 0.35rem;
+    }
+
+    a {
+      color: var(--accent);
+    }
+
+    .author-panel {
+      padding: 1.8rem;
+      border: 1px solid #d6c7b4;
+      border-left: 6px solid #7b5a37;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #f9f6f1 0%, #f0e8dc 100%);
+      box-shadow: 0 10px 24px rgba(38, 28, 14, 0.08);
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .author-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+      background: #e8dcc8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Fraunces", serif;
+      font-size: 2.5rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .author-content {
+      flex-grow: 1;
+    }
+
+    .author-name {
+      font-family: "Fraunces", serif;
+      font-size: 1.5rem;
+      margin: 0;
+      color: var(--accent);
+    }
+
+    .author-role {
+      margin: 0.1rem 0 0.8rem;
+      color: #4f463a;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .author-panel p {
+      margin: 0.45rem 0;
+      max-width: 65ch;
+    }
+
+    .post-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+    }
+
+    .post-list li {
+      padding: 1.1rem 1.2rem;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fcf7ef;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    .post-list li + li {
+      margin-top: 0.85rem;
+    }
+
+    .post-list li:hover {
+      background: #f8efde;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(45, 32, 16, 0.08);
+    }
+
+    .post-list a.post-title {
+      display: block;
+      text-decoration: none;
+      color: var(--accent);
+      font-family: "Fraunces", serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .post-list a.post-title:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.14em;
+    }
+
+    .post-meta {
+      margin: 0.3rem 0 0.5rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .post-summary {
+      margin: 0.4rem 0 0;
+      color: #3d362b;
+      font-size: 0.98rem;
+      max-width: none;
+    }
+
+    .external-tag {
+      display: inline-block;
+      margin-left: 0.5rem;
+      padding: 0.1rem 0.5rem;
+      background: var(--accent-soft);
+      border: 1px solid #e0cfbc;
+      border-radius: 999px;
+      color: var(--accent);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      vertical-align: middle;
+    }
+
+    details.collapsible {
+      max-width: 100%;
+      margin: 0;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fcf7ef;
+      overflow: hidden;
+    }
+
+    details.collapsible summary {
+      cursor: pointer;
+      color: var(--accent);
+      font-weight: 700;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.25rem;
+      padding: 1rem 1.2rem;
+      list-style: none;
+      user-select: none;
+    }
+
+    details.collapsible summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.collapsible summary::before {
+      content: "+ ";
+    }
+
+    details.collapsible[open] summary::before {
+      content: "\2212  ";
+    }
+
+    .collapsible-body {
+      padding: 0 1.2rem 1.2rem;
+    }
+
+    footer {
+      margin: 1rem 0 3rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    footer p {
+      margin: 0.3rem 0;
+      max-width: none;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .container {
+        margin: 1.2rem auto;
+      }
+
+      .hero {
+        padding: 1.2rem;
+      }
+
+      article {
+        padding: 1rem;
+      }
+
+      .author-panel {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header class="hero">
+      <h1>Csaba Purszki</h1>
+      <p class="meta-line">Senior C++ Systems Engineer &bull; Real-time &amp; Low-Latency &bull; 20+ years</p>
+      <p class="subtitle">
+        Notes on C++, computer vision, Bitcoin, sailing, Irish trad music, and whatever else is worth writing down.
+      </p>
+
+      <nav class="toc" aria-label="Table of contents">
+        <a href="#blogposts">Blogposts</a>
+        <a href="#about">About</a>
+      </nav>
+    </header>
+
+    <article>
+      <section id="blogposts">
+        <h2>Blogposts</h2>
+        <ul class="post-list">
+          <li>
+            <a class="post-title" href="iceoryx2-deterministic.html">I wrote Iceoryx2 years ago, or: deterministic software development through the example of zero-copy shared memory queues</a>
+            <p class="post-meta">Automotive &bull; Systems &bull; Shared Memory</p>
+            <p class="post-summary">A story from the Valeo ADAS surround-view camera system: the five faces (and one bonus) of a deterministic SWMR shared-memory queue &mdash; lifecycle, integrity, efficiency, timing, and timestamped history &mdash; and how this work foreshadowed today's iceoryx2.</p>
+          </li>
+          <li>
+            <a class="post-title" href="https://purszki.github.io/bitcoin_research_01/" target="_blank" rel="noopener">Bitcoin Light Client Block Filter Research <span class="external-tag">External</span></a>
+            <p class="post-meta">April 2026 &bull; Bitcoin &bull; BIP 158 &bull; Binary Fuse Filters</p>
+            <p class="post-summary">ChainCode Labs BOSS 2026 portfolio project: benchmarking BIP 158 against Binary Fuse filters across 50,000 mainnet blocks and 10 wallet scenarios. Fuse16 preserves zero false negatives while cutting client-side query CPU by 9&ndash;81x on desktop and 6&ndash;46x on a Raspberry Pi 5, with comparable bandwidth to GCS.</p>
+          </li>
+        </ul>
+      </section>
+
+      <section id="about">
+        <details class="collapsible">
+          <summary>About</summary>
+          <div class="collapsible-body">
+            <div class="author-panel">
+              <div class="author-img" aria-hidden="true">CP</div>
+              <div class="author-content">
+                <h2 class="author-name">Csaba Purszki</h2>
+                <p class="author-role">Senior C++ Systems Engineer</p>
+                <p>20+ years of building high-performance, low-latency, real-time C++ systems. Modern C++, concurrency, custom memory allocators, lock-free data structures, cache-aware design, shared-memory IPC, cross-platform builds.</p>
+                <p>Reach me at <a class="email-link" data-u="ikzsrup.abasc" data-d="moc.liamg" href="#">email me</a>.</p>
+              </div>
+            </div>
+          </div>
+        </details>
+      </section>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; Csaba Purszki &bull; <a class="email-link" data-u="ikzsrup.abasc" data-d="moc.liamg" href="#">email me</a></p>
+  </footer>
+
+  <script>
+    (function () {
+      var rev = function (s) { return s.split('').reverse().join(''); };
+      var links = document.querySelectorAll('a.email-link[data-u][data-d]');
+      for (var i = 0; i < links.length; i++) {
+        (function (el) {
+          el.addEventListener('click', function (e) {
+            if (el.dataset.revealed === '1') return;
+            e.preventDefault();
+            var addr = rev(el.getAttribute('data-u')) + '@' + rev(el.getAttribute('data-d'));
+            el.textContent = addr;
+            el.setAttribute('href', 'mai' + 'lto:' + addr);
+            el.dataset.revealed = '1';
+            window.location.href = el.getAttribute('href');
+          });
+        })(links[i]);
+      }
+    })();
+  </script>
+</body>
+</html>

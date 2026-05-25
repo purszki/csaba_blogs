@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>I wrote Iceoryx2 years ago — Csaba Purszki</title>
+  <meta name="description" content="Deterministic software development through the example of zero-copy shared memory queues." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f5ef;
+      --paper: #fffdfa;
+      --ink: #22201a;
+      --muted: #6a6257;
+      --line: #dfd8cb;
+      --accent: #8a5b2a;
+      --accent-soft: #efe4d7;
+      --shadow: 0 20px 45px rgba(45, 32, 16, 0.09);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Source Sans 3", "Trebuchet MS", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, #f2e7d8 0%, transparent 42%),
+        radial-gradient(circle at 90% 0%, #efe7dc 0%, transparent 35%),
+        var(--bg);
+      line-height: 1.65;
+    }
+
+    .container {
+      width: min(900px, 92vw);
+      margin: 3rem auto;
+    }
+
+    .hero {
+      background: linear-gradient(145deg, #fffdfa 0%, #f8f2e7 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2.5rem;
+      animation: rise 650ms ease-out;
+      position: relative;
+    }
+
+    h1, h2, h3 {
+      font-family: "Fraunces", Georgia, serif;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    h1 {
+      font-size: clamp(1.9rem, 3.4vw, 2.8rem);
+      margin: 0 0 0.2rem;
+    }
+
+    .hero h2.alt-title {
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 500;
+      font-style: italic;
+      font-size: clamp(1.3rem, 2.4vw, 2rem);
+      line-height: 1.25;
+      margin: 0 0 1rem;
+      color: #4a3720;
+      max-width: 38ch;
+    }
+
+    h2 {
+      font-size: clamp(1.3rem, 2vw, 1.7rem);
+      margin: 1.8rem 0 0.6rem;
+      color: #4a3720;
+    }
+
+    h3 {
+      font-size: clamp(1.05rem, 1.7vw, 1.25rem);
+      margin: 1.3rem 0 0.5rem;
+      color: #4a3720;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 70ch;
+      margin: 0;
+    }
+
+    .meta-line {
+      margin: 0 0 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1.2rem;
+      text-decoration: none;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid #e0cfbc;
+      padding: 0.4rem 0.75rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: transform 160ms ease, background 160ms ease;
+    }
+
+    .back-link:hover {
+      background: #e8d8c3;
+      transform: translateY(-1px);
+    }
+
+    article {
+      margin-top: 1.6rem;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(1.2rem, 2.4vw, 2.4rem);
+      animation: rise 900ms ease-out;
+    }
+
+    article p, article ul, article ol {
+      margin: 0.75rem 0;
+      max-width: 72ch;
+      font-size: 1.05rem;
+    }
+
+    article p.lead {
+      font-size: 1.15rem;
+      color: #2e2a22;
+    }
+
+    a {
+      color: var(--accent);
+    }
+
+    code {
+      font-family: "Cascadia Code", "Source Code Pro", monospace;
+      background: #f3eadf;
+      padding: 0.08rem 0.3rem;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+
+    .pull {
+      margin: 1.6rem 0;
+      padding: 1rem 1.2rem;
+      background: #f3eadf;
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.1rem;
+      color: #3a2c18;
+      max-width: 72ch;
+    }
+
+    .note {
+      margin-top: 2rem;
+      padding: 0.9rem 1rem;
+      background: #f3eadf;
+      border: 1px solid #dfcfbb;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 72ch;
+    }
+
+    footer {
+      margin: 1rem 0 3rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .container {
+        margin: 1.2rem auto;
+      }
+
+      .hero {
+        padding: 1.2rem;
+      }
+
+      article {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header class="hero">
+      <a class="back-link" href="index.html">&larr; Back to blog</a>
+      <h1>I wrote Iceoryx2 years ago, or</h1>
+      <h2 class="alt-title">deterministic software development through the example of zero-copy shared memory queues</h2>
+      <p class="meta-line">Csaba Purszki &bull; Automotive &amp; Systems Engineering</p>
+    </header>
+
+    <article>
+      <p class="lead">Nowadays, when AI is flowing from every tap, it is worth saying a few words about the necessity of deterministic operation in systems. One of our Valeo product, a surround view camera system for a premium German OEM is a real success: by my estimation, to this day it has been built into around 9&ndash;10 models, in several hundred thousand manufactured vehicles, and in vehicles that are still in production today. I have a good story to tell about one interesting component of this system.</p>
+
+      <p>I am extremely proud that I had the chance to design the component that enables communication between the computer vision algorithms. An opportunity like this rarely comes along in an engineer's life. It is an under-the-hood component: it silently does its job while everyone else is focusing on the killer features of the product, such as the manoeuvre assistant or the surround view camera image.</p>
+
+      <p>It was only recently &mdash; while looking at the iceoryx2 library &mdash; that I realized what a killer component we had shipped, quietly and unnoticed. Because I had already written it earlier; what's more, it runs flawlessly in thousands of vehicles!</p>
+
+      <p>At Valeo, around 2019, in an excellent international team, we built a system that was considered revolutionary modern at that time, and then, through blood, sweat and tears, became one of the most successful products of our department. I am talking about the heart of an ADAS camera system, which at that time was among the first in the industry to include a neural accelerator chip.</p>
+
+      <h2>Safety and determinism</h2>
+
+      <p>In the automotive industry, the ISO 26262 standard ensures that the IT systems built into our cars are safe for everyone. However, many people do not know that even non-safety systems, which we call QM, also have to meet serious safety requirements. The basic requirement of safety is the deterministic operation of systems. This is not a question even for QM. In higher safety levels, the same deterministic operation goes through more thorough tests and is better documented; however, at least theoretically, the source code should not be very different between, let's say, an ASIL-B and a QM system. This particular camera system developed by us had both QM and ASIL qualification components.</p>
+
+      <p>The question arises: what makes a computer vision system deterministic, whether it is AI-based or traditional? Unfortunately, we know that the effectiveness of image processing systems, the KPI, is in practice not deterministic, because the result depends on an extremely large number of input parameters. And it isn't the determinism of the KPI that's expected, but, put simply, the reliability and predictability of the software.</p>
+
+      <p>However, the infrastructure living <em>beneath</em> the algorithms is very much deterministic, and we worked <em>a lot</em> to make it in proper quality. If it were not deterministic, it would not reach not only ASIL, but not even QM certification.</p>
+
+      <div class="pull">The work of the teams that handle the configuration, communication, and integration of image-processing algorithms is the realm of silent heroes.</div>
+
+      <p>Management, the sales department, and conference speakers like to show colorful and shiny diagrams about the operation of algorithms using fantastic mathematics, deep learning and AI &mdash; and they are right to do so, that's what we live on.</p>
+
+      <p>However, our industry has a neglected corner: little glory falls to the engineers who make all this infrastructure possible &mdash; who let the computer-vision algorithms published in journals, or welded together from here and there, actually come alive on the hardware.</p>
+
+      <p>Yet they are the ones &mdash; or rather, let me put it this way: <em>we are the ones</em> &mdash; who make it possible for neural networks and traditional image processing algorithms to run in <em>your</em> cars.</p>
+
+      <h2>What makes a framework deterministic?</h2>
+
+      <p>Back to deterministic operation: <strong>what makes such a framework deterministic</strong>? The primary task of the infrastructure, or framework, that binds together the algorithms is the undisturbed operation of communication between the components.</p>
+
+      <p>So what is the <em>soul</em> of big data communication between algorithms, as we called it then? This soul has <strong>five faces</strong>, and one bonus property. Let us go through them.</p>
+
+      <p>Imagine a situation where algorithm A writes a queue, and on another thread, in another process, or maybe on another processor, algorithm B reads the same queue. Unfortunately, there can also be a third or fourth reader, for example a recorder unit or a third algorithm.</p>
+
+      <p>Queues implemented in shared memory like this are called Single Writer Multiple Reader, or SWMR, queues.</p>
+
+      <h3>1. Lifecycle</h3>
+
+      <p>The first face of deterministic SWMR queues is the lifecycle.</p>
+
+      <p>It is possible that algorithms A and B are in sync. It is also possible that A is faster and B is slower, or the other way around. Since the runtime of computer vision algorithms typically depends on the input, unfortunately we cannot appeal to the idea that A and B are always in sync.</p>
+
+      <p>The communication module has to know whether a buffer is currently being written, or exactly how many readers are reading it &mdash; in other words, a reference counter must be attached to every element of the queue.</p>
+
+      <p>The key of the lifecycle is the reference counter attached to the buffer.</p>
+
+      <p>A challenge is the initialization of the shared memory (and of the reference counter). The question always comes up: is the start-up process deterministic? And if by chance it isn't, can we somehow detect that initialization has not happened? For anyone interested in a big initialization trap, ask yourself: in the case of a soft reset, does memory get cleared?</p>
+
+      <h3>2. Integrity of data structures</h3>
+
+      <p>The second face of the soul of deterministic queues is the integrity of data structures.</p>
+
+      <p>Since this is a distributed system, deterministic operation can only be reached if the integrity of the data, and the integrity of the data structures implementing the queue, are ensured &mdash; in other words, our data structures must be protected with CRC. How can data get corrupted in memory? The most probable case is that someone configures the cache incorrectly, or does not flush it in time. It is also possible that a buffer overflow bug slips in somewhere.</p>
+
+      <p>It's worth separating the buffer's CRC from the data structure's CRC &mdash; because the data-structure CRC has to be computed on every operation, e.g. on a <code>push</code>, whereas the CPU can only afford to compute the buffer CRC occasionally.</p>
+
+      <p>We talked about cache. Inside the ARM cluster, the hardware takes care that the cache and the memory are always coherent during reading. However, if ARM&ndash;DSP communication happens through shared memory, then we have to take care of keeping cache coherency correct.</p>
+
+      <p>A typical bug during development is that the cache is programmed incorrectly, or one of the modules forgets that it has to take care of invalidating the cache line. We thought that the queue should not deal with the buffer cache, but it should pay attention to the correctness of the data-structure cache if we work outside the ARM cluster.</p>
+
+      <h3>3. Efficiency</h3>
+
+      <p>The third face of the soul is efficiency.</p>
+
+      <p>A basic condition is the zero-copy buffer: the communication module should not copy the large data structures; they should be writable and readable in place.</p>
+
+      <h3>4. Timing</h3>
+
+      <p>The fourth face of the deterministic soul is timing.</p>
+
+      <p>An important condition for deterministic operation is that every queue operation &mdash; <code>push</code>, <code>pop</code>, <code>back</code>, <code>front</code> operators &mdash; should run in O(1) time. It should not be necessary to wait for a mutex for an indefinite time, and there should be no chance of a deadlock either.</p>
+
+      <p>Because of multi-process and multi-CPU architectures, we need a locking primitive. This can be a register provided by the hardware, but it can also be an expensive software solution in shared memory. Such a system cannot wait for the lock. Every locked operation must happen in O(1) time, under a defined timeout.</p>
+
+      <p>The safety community calls this <strong>WCET</strong>: Worst Case Execution Time. The WCET must have an upper bound.</p>
+
+      <h3>5. Timestamp-based history</h3>
+
+      <p><strong>The fifth face of the soul</strong> of the queue is a detail that seems small, but is important: <strong>timestamp-based history</strong>.</p>
+
+      <p>In a distributed system, timing is critical. The decision was made that the first element of the queue would not be the one that is in the first place in the data structure, but the one that has the smallest timestamp. This is extremely important because it is possible that a recorder sits between the writer and the reader algorithm, and it holds a buffer for a long time, completely disturbing the timing that otherwise seems simple.</p>
+
+      <div class="pull">Our queue can be understood as a key-based, timestamped, N-sample history database.</div>
+
+      <p>This is also why we first called it storage, and not a queue.</p>
+
+      <h3>Bonus: observability</h3>
+
+      <p>There is one last, but <strong>magical, benefit of these deterministically operating queues</strong>. Their operation can be logged very well, and from their logs we can get a complete picture about the timing questions of a complex system containing many CPUs. Add a logging system, and we get a complete picture about the timing habits of our algorithms, and about the jittering of the system, if there is any &mdash; of course there is none. :)</p>
+
+      <p>In this genre, the deterministic, integrity-protected implementation is the winner. I believe that in our AI-dominated era, this combination has a bright future.</p>
+
+      <h2>Closing notes</h2>
+
+      <p>The computer vision algorithm communication of our particular ADAS system developed at Valeo was born along these principles. I am proud that I could design this module, with the help of many colleagues. Yugandhar M. extended the system with a PCIe communication push/pull component, and it would not have been completed without the feedback of Anil J., who was the first to integrate it into real computer vision algorithms.</p>
+
+      <p>For such a success, excellent project management / team leading support was also needed from Christy C., Srinivasa M. in our Tuam office. We worked together from three or four countries, and I also remember with nostalgia the support of the Chennai team, many good guys.</p>
+
+      <p>Looking back, I worked in a great team. Today it is almost unimaginable, but there were two ECUs, two JTAG emulators, and everything else needed for development sitting on my desk. It seems that the AI hype has a bad effect on classical engineering principles.</p>
+
+      <p>Nowadays, maybe there would be no need to design MtdStorage, as we called it. Iceoryx2 can be downloaded. In Rust and modern C++, as a product, it can do something similar to what we implemented in C++03 according to MISRA rules &mdash; and actually it can do a little less as well, because it does not have native CRC-protected integrity protection, which saved us from a lot of debugging. The key-based, timestamped history semantics was the first idea from which we started; in contrast, iceoryx2 has a slightly different approach to sort out the same issue.</p>
+
+      <p>Alright, everyone &mdash; back to work. Open up your Claude Code or Gemini CLI, feed it this article, and prompt your own deterministic IPC component &mdash; if you're not faint-hearted. Or just give me a short call.</p>
+
+      <p class="note"><em>AI ethics note: Article originally written by hand in my beautiful mother tongue, Hungarian, and auto-compiled into English by an LLM.</em></p>
+    </article>
+  </main>
+
+  <footer>
+    &copy; Csaba Purszki &bull; <a href="index.html">Back to blog</a>
+  </footer>
+</body>
+</html>
