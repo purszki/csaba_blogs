@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Csaba Purszki &mdash; CV</title>
+  <meta name="description" content="Curriculum vitae of Csaba Purszki: C++ systems engineer, 20+ years in real-time, low-latency and safety-critical software. Concurrency verification, lock-free design, and Bitcoin protocol research." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f5ef;
+      --paper: #fffdfa;
+      --ink: #22201a;
+      --muted: #6a6257;
+      --line: #dfd8cb;
+      --accent: #8a5b2a;
+      --accent-soft: #efe4d7;
+      --shadow: 0 20px 45px rgba(45, 32, 16, 0.09);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Source Sans 3", "Trebuchet MS", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, #f2e7d8 0%, transparent 42%),
+        radial-gradient(circle at 90% 0%, #efe7dc 0%, transparent 35%),
+        var(--bg);
+      line-height: 1.65;
+    }
+
+    .container {
+      width: min(1000px, 92vw);
+      margin: 3rem auto;
+    }
+
+    a {
+      color: var(--accent);
+    }
+
+    h1, h2, h3 {
+      font-family: "Fraunces", Georgia, serif;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    /* ---------- header ---------- */
+
+    .hero {
+      background: linear-gradient(145deg, #fffdfa 0%, #f8f2e7 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2.5rem;
+      animation: rise 650ms ease-out;
+      display: flex;
+      gap: 1.8rem;
+      align-items: center;
+    }
+
+    .hero-badge {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: var(--accent-soft);
+      border: 3px solid white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Fraunces", serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .hero-main {
+      flex-grow: 1;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 3.5vw, 2.9rem);
+      margin: 0 0 0.4rem;
+    }
+
+    .meta-line {
+      margin: 0 0 0.9rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.4rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .contact li {
+      margin: 0;
+    }
+
+    .contact a {
+      text-decoration: none;
+    }
+
+    .contact a:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.14em;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin: 1.4rem 0 0;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.14em;
+    }
+
+    /* ---------- layout ---------- */
+
+    .sheet {
+      margin-top: 1.6rem;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(1.4rem, 2.6vw, 2.6rem);
+      animation: rise 900ms ease-out;
+    }
+
+    section + section {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--line);
+    }
+
+    h2 {
+      font-size: clamp(1.3rem, 2.1vw, 1.7rem);
+      margin: 0 0 1rem;
+      color: var(--ink);
+    }
+
+    h2 .kicker {
+      display: inline-block;
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-right: 0.7rem;
+      vertical-align: middle;
+    }
+
+    p {
+      margin: 0.65rem 0;
+      max-width: 78ch;
+    }
+
+    .lead {
+      font-size: 1.08rem;
+      color: #3d362b;
+    }
+
+    /* ---------- competencies grid ---------- */
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0.85rem;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fcf7ef;
+      padding: 1rem 1.1rem;
+    }
+
+    .card h3 {
+      font-size: 1.02rem;
+      margin: 0 0 0.3rem;
+      color: #4a3720;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 0.94rem;
+      color: #3d362b;
+    }
+
+    /* ---------- achievement / tag chips ---------- */
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0.4rem 0 0;
+    }
+
+    .chip {
+      background: var(--accent-soft);
+      border: 1px solid #e0cfbc;
+      color: var(--accent);
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.88rem;
+    }
+
+    .achievements {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .achievements li {
+      padding: 1rem 1.2rem;
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--accent);
+      border-radius: 12px;
+      background: #fcf7ef;
+    }
+
+    .achievements strong {
+      font-family: "Fraunces", serif;
+      color: #4a3720;
+    }
+
+    /* ---------- experience timeline ---------- */
+
+    .job {
+      position: relative;
+    }
+
+    .job + .job {
+      margin-top: 1.6rem;
+      padding-top: 1.6rem;
+      border-top: 1px dashed var(--line);
+    }
+
+    .job-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.3rem 1rem;
+    }
+
+    .job-title {
+      font-family: "Fraunces", serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #4a3720;
+      margin: 0;
+    }
+
+    .job-dates {
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .job-place {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin: 0.15rem 0 0.7rem;
+    }
+
+    .role {
+      margin-top: 0.9rem;
+    }
+
+    .role-title {
+      font-weight: 600;
+      color: var(--accent);
+      margin: 0 0 0.25rem;
+    }
+
+    .role ul {
+      margin: 0.3rem 0 0;
+      padding-left: 1.2rem;
+    }
+
+    .role li {
+      margin-top: 0.3rem;
+      max-width: 80ch;
+    }
+
+    /* ---------- small facts row ---------- */
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .facts h3 {
+      font-size: 1.02rem;
+      margin: 0 0 0.35rem;
+      color: #4a3720;
+    }
+
+    .facts p, .facts ul {
+      margin: 0;
+      font-size: 0.96rem;
+      color: #3d362b;
+    }
+
+    .facts ul {
+      padding-left: 1.15rem;
+    }
+
+    footer {
+      margin: 1.4rem 0 3rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    footer p {
+      margin: 0.3rem 0;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 720px) {
+      .container { margin: 1.2rem auto; }
+      .hero {
+        padding: 1.4rem;
+        flex-direction: column;
+        text-align: center;
+      }
+      .contact { justify-content: center; }
+      .sheet { padding: 1.1rem; }
+      .job-head { flex-direction: column; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .hero, .sheet { box-shadow: none; animation: none; }
+      .back-link { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header class="hero">
+      <div class="hero-badge" aria-hidden="true">CP</div>
+      <div class="hero-main">
+        <h1>Csaba Purszki</h1>
+        <p class="meta-line">C++ Systems Engineer &bull; Concurrency &amp; Verification &bull; Low-Latency / Real-time &bull; 20+ years</p>
+        <ul class="contact">
+          <li>Budapest, Hungary</li>
+          <li><a class="email-link" data-u="ikzsrup.abasc" data-d="moc.liamg" href="#">email me</a></li>
+          <li>+36 70 416 42 26</li>
+          <li>Computer Vision Kft &bull; VAT HU25100145</li>
+        </ul>
+      </div>
+    </header>
+
+    <div class="sheet">
+      <section id="summary">
+        <h2><span class="kicker" aria-hidden="true"></span>Summary</h2>
+        <p class="lead">
+          C++ systems engineer who finds the defects that formal proofs and sanitizers miss
+          &mdash; by running the evidence, not arguing it. 20+ years in safety-critical,
+          real-time, low-latency systems, including patented, mass-production automotive ADAS.
+        </p>
+        <p>
+          I write lock-free and concurrency code and establish its correctness by instrumented
+          reproduction rather than argument &mdash; catching memory-ordering races that formal
+          derivations and thread sanitizers pass. I rescue vendor-hostile, undocumented
+          toolchains, and I run an AI-orchestrated, evidence-graded review pipeline. Currently
+          extending this work to Bitcoin protocol research (ChainCode Labs BOSS 2026).
+        </p>
+      </section>
+
+      <section id="competencies">
+        <h2><span class="kicker" aria-hidden="true"></span>Core Competencies</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Modern C++</h3>
+            <p>STL, RAII, templates, move semantics, low-level and cache-aware optimization.</p>
+          </div>
+          <div class="card">
+            <h3>Low-Latency &amp; Lock-Free</h3>
+            <p>Atomics and memory ordering, lock-free data structures, jitter-free real-time hot paths.</p>
+          </div>
+          <div class="card">
+            <h3>Concurrency Verification</h3>
+            <p>Reproducible proof of race and memory-order correctness &mdash; catching defects that formal derivation and sanitizers pass.</p>
+          </div>
+          <div class="card">
+            <h3>Performance Engineering</h3>
+            <p>Profiling, custom memory allocators, deterministic O(1) allocation, memory efficiency.</p>
+          </div>
+          <div class="card">
+            <h3>Architecture &amp; Systems</h3>
+            <p>Binary compatibility, semantic versioning, IPC / shared memory, cross-platform and cross-toolchain builds.</p>
+          </div>
+          <div class="card">
+            <h3>AI-Orchestrated Engineering</h3>
+            <p>Multi-agent reviewer / implementer pipelines with mutation-proven test gates and ISO 26262 review lenses.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="achievements">
+        <h2><span class="kicker" aria-hidden="true"></span>Selected Achievements</h2>
+        <ul class="achievements">
+          <li><strong>Reproducible Concurrency Verification</strong> &mdash; Established the correctness of lock-free, fence-based synchronization by building instrumented torn-record detectors and fault-injection harnesses &mdash; catching a writer-writer memory-ordering race that two sound formal derivations and thread sanitizers had passed, then proving the fix (0 failures across 50,000 runs).</li>
+          <li><strong>Custom Memory Allocator</strong> &mdash; Designed a custom allocator that eliminates fragmentation and provides O(1) allocations, achieving deterministic, jitter-free performance in a mission-critical, real-time environment.</li>
+          <li><strong>Deterministic Shared-Memory IPC</strong> &mdash; Architected a low-latency single-writer/multi-reader shared-memory queue for real-time ADAS surround-view &mdash; lifecycle, integrity, timing and timestamped history; the design foreshadowed today's iceoryx2. <a href="iceoryx2-deterministic.html">Write-up &rarr;</a></li>
+          <li><strong>Source-Verified Bug Hunting</strong> &mdash; Routinely locate reproducible memory-safety and concurrency defects (buffer overflows, TOCTOU, use-after-free) deep inside large, undocumented third-party and vendor codebases &mdash; found by reproduction, not by reading.</li>
+          <li><strong>Patented Parking-Slot Detection</strong> &mdash; Architected the software of a camera-based parking-slot-marking detection algorithm, deployed in mass-production ADAS (patented).</li>
+          <li><strong>AI-Orchestrated Review Pipeline</strong> &mdash; Built and operate a 26-agent reviewer/implementer pipeline with mutation-proven test gates: every fix is proven by a test that fails on the defect and passes on the fix.</li>
+          <li><strong>C++ protobuf layer on nanopb</strong> &mdash; Added a C++ layer on top of nanopb for easier protocol-buffer integration in embedded projects.</li>
+        </ul>
+      </section>
+
+      <section id="bitcoin">
+        <h2><span class="kicker" aria-hidden="true"></span>Bitcoin &amp; Protocol Research</h2>
+        <ul class="achievements">
+          <li><strong>ChainCode Labs BOSS 2026</strong> &mdash; Selected participant; systems-level Bitcoin protocol research and open-source study.</li>
+          <li><strong>Light-Client Block Filter Research</strong> &mdash; Benchmarked BIP&nbsp;158 against Binary-Fuse filters across 50,000 mainnet blocks and 10 wallet scenarios: Fuse16 preserves zero false negatives while cutting client-side query CPU by 9&ndash;81&times; on desktop and 6&ndash;46&times; on a Raspberry&nbsp;Pi&nbsp;5, at bandwidth comparable to GCS. <a href="https://purszki.github.io/bitcoin_research_01/" target="_blank" rel="noopener">Read the write-up &rarr;</a></li>
+          <li><strong>Lightning &amp; wallet internals (C)</strong> &mdash; Implemented an HTLC route builder and a BOLT&nbsp;04 Sphinx onion builder; wrote custom-signet wallets (descriptor balance, 2-of-2 multisig spend via PSBT) and a UTXO coin-selection algorithm.</li>
+        </ul>
+      </section>
+
+      <section id="experience">
+        <h2><span class="kicker" aria-hidden="true"></span>Experience</h2>
+
+        <div class="job">
+          <div class="job-head">
+            <p class="job-title">Valeo Vision Systems &mdash; Independent Contractor (Computer Vision Kft)</p>
+            <span class="job-dates">05/2014 &ndash; Present</span>
+          </div>
+          <p class="job-place">Budapest, Hungary &bull; Ireland &bull; Automotive / Computer Vision</p>
+
+          <div class="role">
+            <p class="role-title">Algorithm Framework Expert</p>
+            <ul>
+              <li>Developed a reusable algorithm framework enabling multiple teams to integrate memory pools, debugging/visualization, logging, and shared-memory I/O.</li>
+              <li>Provided technical leadership, mentoring junior engineers and ensuring best practices in concurrency and resource management.</li>
+              <li>Improved the team's efficiency by introducing test-driven development using google-test.</li>
+            </ul>
+          </div>
+
+          <div class="role">
+            <p class="role-title">Algorithm Embedded Lead &mdash; Parking Slot Marking Detection</p>
+            <ul>
+              <li>Designed the SW architecture of the patented Parking Slot Marking Detection algorithm.</li>
+              <li>Played a major role in developing a package-manager-based build system employing semantic versioning and CI/CD for consistent, stable integration of multiple modules.</li>
+              <li>Enabled straightforward backward compatibility, reduced integration overhead, and streamlined release processes.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="job">
+          <div class="job-head">
+            <p class="job-title">Valeo Vision Systems &mdash; Software Engineer</p>
+            <span class="job-dates">05/2011 &ndash; 05/2014</span>
+          </div>
+          <p class="job-place">Tuam, Co. Galway, Ireland &bull; Automotive / Computer Vision</p>
+
+          <div class="role">
+            <p class="role-title">DSP Lead &mdash; Calibration and Scene Viewing Group</p>
+            <ul>
+              <li>Designed the SW architecture of computer vision algorithms.</li>
+              <li>Contributed to process definition and code-reuse practices.</li>
+            </ul>
+          </div>
+
+          <div class="role">
+            <p class="role-title">Algorithm Integrator &mdash; Software Group</p>
+            <ul>
+              <li>Integrated and maintained the automatic road-based camera calibration algorithm across customer projects.</li>
+              <li>Refactored and ported the algorithm from C to C++ as a reusable library optimized for TI VisionMid and OMAP platforms.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="job">
+          <div class="job-head">
+            <p class="job-title">Intellio Zrt &mdash; Algorithm Developer</p>
+            <span class="job-dates">08/2005 &ndash; 04/2011</span>
+          </div>
+          <p class="job-place">Budapest, Hungary &bull; Video Surveillance Systems</p>
+
+          <div class="role">
+            <ul>
+              <li>Architected an algorithm development framework for object-tracker-based applications.</li>
+              <li>Developed computer vision algorithms: object tracker, background subtraction, camera calibration, color recognition, shadow filtering.</li>
+              <li>Traffic detector &mdash; statistical analysis of traffic flow and detection of suspicious (stopping, wrong-direction) vehicles.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="patents">
+        <h2><span class="kicker" aria-hidden="true"></span>Patents</h2>
+        <p>
+          Contributor to German Patent related to parking slot detection
+          (DE102019102561A1, &ldquo;Verfahren zur Erkennung einer Fahrbahnmarkierung&rdquo;).
+        </p>
+      </section>
+
+      <section id="writing">
+        <h2><span class="kicker" aria-hidden="true"></span>Selected Writing &amp; Evidence</h2>
+        <ul>
+          <li><a href="https://purszki.github.io/bitcoin_research_01/" target="_blank" rel="noopener">Bitcoin Light-Client Block Filter Research</a> &mdash; BIP&nbsp;158 vs Binary-Fuse benchmark (ChainCode BOSS 2026).</li>
+          <li><a href="iceoryx2-deterministic.html">Deterministic software through zero-copy shared-memory queues</a> &mdash; the five faces of a real-time SWMR queue, foreshadowing iceoryx2.</li>
+        </ul>
+      </section>
+
+      <section id="footer-facts">
+        <div class="facts">
+          <div>
+            <h3>Education</h3>
+            <p>MSc. Electrical Engineer<br>Budapest University of Technology and Economics (BME)<br>2000 &ndash; 2005</p>
+          </div>
+          <div>
+            <h3>Languages</h3>
+            <ul>
+              <li>Hungarian (native)</li>
+              <li>English (fluent)</li>
+              <li>German (basic)</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Other</h3>
+            <ul>
+              <li>Father of two</li>
+              <li>Trad musician</li>
+              <li>Weekend sailor</li>
+            </ul>
+          </div>
+        </div>
+        <a class="back-link" href="index.html">&larr; Back to blog</a>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; Csaba Purszki &bull; <a class="email-link" data-u="ikzsrup.abasc" data-d="moc.liamg" href="#">email me</a></p>
+  </footer>
+
+  <script>
+    (function () {
+      var rev = function (s) { return s.split('').reverse().join(''); };
+      var links = document.querySelectorAll('a.email-link[data-u][data-d]');
+      for (var i = 0; i < links.length; i++) {
+        (function (el) {
+          el.addEventListener('click', function (e) {
+            if (el.dataset.revealed === '1') return;
+            e.preventDefault();
+            var addr = rev(el.getAttribute('data-u')) + '@' + rev(el.getAttribute('data-d'));
+            el.textContent = addr;
+            el.setAttribute('href', 'mai' + 'lto:' + addr);
+            el.dataset.revealed = '1';
+            window.location.href = el.getAttribute('href');
+          });
+        })(links[i]);
+      }
+    })();
+  </script>
+</body>
+</html>
