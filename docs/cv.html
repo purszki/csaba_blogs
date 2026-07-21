@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Csaba Purszki &mdash; CV</title>
-  <meta name="description" content="Curriculum vitae of Csaba Purszki: C++ systems engineer, 20+ years in real-time, low-latency and safety-critical software. Concurrency verification, lock-free design, and Bitcoin protocol research." />
+  <meta name="description" content="Curriculum vitae of Csaba Purszki: C++ systems engineer with 20+ years of experience in real-time, low-latency, and safety-critical software. Modern C++, concurrency, lock-free design, and systems architecture." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
@@ -124,6 +124,31 @@
       text-underline-offset: 0.14em;
     }
 
+    .cimg {
+      vertical-align: middle;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .guard {
+      cursor: pointer;
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px dashed currentColor;
+      padding-bottom: 1px;
+    }
+
+    .guard::before {
+      content: "\2022\2022\2022  ";
+      letter-spacing: 0.05em;
+      opacity: 0.55;
+    }
+
+    .guard:hover {
+      color: #6f4620;
+    }
+
     .back-link {
       display: inline-block;
       margin: 1.4rem 0 0;
@@ -208,24 +233,7 @@
       color: #3d362b;
     }
 
-    /* ---------- achievement / tag chips ---------- */
-
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin: 0.4rem 0 0;
-    }
-
-    .chip {
-      background: var(--accent-soft);
-      border: 1px solid #e0cfbc;
-      color: var(--accent);
-      padding: 0.35rem 0.75rem;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 0.88rem;
-    }
+    /* ---------- achievements ---------- */
 
     .achievements {
       list-style: none;
@@ -376,12 +384,14 @@
       <div class="hero-badge" aria-hidden="true">CP</div>
       <div class="hero-main">
         <h1>Csaba Purszki</h1>
-        <p class="meta-line">C++ Systems Engineer &bull; Concurrency &amp; Verification &bull; Low-Latency / Real-time &bull; 20+ years</p>
+        <p class="meta-line">Senior C++ SW engineer</p>
         <ul class="contact">
-          <li>Budapest, Hungary</li>
-          <li><a class="email-link" data-u="ikzsrup.abasc" data-d="moc.liamg" href="#">email me</a></li>
-          <li>+36 70 416 42 26</li>
-          <li>Computer Vision Kft &bull; VAT HU25100145</li>
+          <li>Computer Vision Kft, 1149. Budapest, Angol u.&nbsp;89. &mdash; Hungary</li>
+          <li>VAT: HU25100145</li>
+          <li><a href="#" class="guard" data-type="phone" data-p="W1gbQ0EdEgQDAA1MBVBZGw==">Show phone</a></li>
+          <li><a href="#" class="guard" data-type="email" data-u="ExhMARcDQkVARVcTXg==" data-d="EwRAEwNZV0IfQEQLXh8FAwsD">Show email</a></li>
+          <li><a href="https://purszki.github.io/csaba_blogs/" target="_blank" rel="noopener">purszki.github.io/csaba_blogs</a></li>
+          <li><a href="https://www.linkedin.com/in/csaba-purszki-b3384834/" target="_blank" rel="noopener">linkedin.com/in/csaba-purszki</a></li>
         </ul>
       </div>
     </header>
@@ -390,16 +400,12 @@
       <section id="summary">
         <h2><span class="kicker" aria-hidden="true"></span>Summary</h2>
         <p class="lead">
-          C++ systems engineer who finds the defects that formal proofs and sanitizers miss
-          &mdash; by running the evidence, not arguing it. 20+ years in safety-critical,
-          real-time, low-latency systems, including patented, mass-production automotive ADAS.
-        </p>
-        <p>
-          I write lock-free and concurrency code and establish its correctness by instrumented
-          reproduction rather than argument &mdash; catching memory-ordering races that formal
-          derivations and thread sanitizers pass. I rescue vendor-hostile, undocumented
-          toolchains, and I run an AI-orchestrated, evidence-graded review pipeline. Currently
-          extending this work to Bitcoin protocol research (ChainCode Labs BOSS 2026).
+          Senior C++ systems engineer with over 20 years of experience in real-time, low-latency,
+          and safety-critical software. My main technical areas are modern C++, concurrency,
+          lock-free design, memory management, shared-memory IPC, and cross-platform architecture.
+          I have designed reusable frameworks and system components for automotive ADAS products
+          used in mass production. 
+         
         </p>
       </section>
 
@@ -408,15 +414,15 @@
         <div class="grid">
           <div class="card">
             <h3>Modern C++</h3>
-            <p>STL, RAII, templates, move semantics, low-level and cache-aware optimization.</p>
+            <p>STL, RAII, templates, low-level and cache-aware optimization.</p>
           </div>
           <div class="card">
             <h3>Low-Latency &amp; Lock-Free</h3>
-            <p>Atomics and memory ordering, lock-free data structures, jitter-free real-time hot paths.</p>
+            <p>Atomics, memory ordering, lock-free data structures, and predictable real-time hot paths.</p>
           </div>
           <div class="card">
             <h3>Concurrency Verification</h3>
-            <p>Reproducible proof of race and memory-order correctness &mdash; catching defects that formal derivation and sanitizers pass.</p>
+            <p>Instrumented, reproducible tests for race and memory-order correctness, supported by static analysis.</p>
           </div>
           <div class="card">
             <h3>Performance Engineering</h3>
@@ -427,8 +433,8 @@
             <p>Binary compatibility, semantic versioning, IPC / shared memory, cross-platform and cross-toolchain builds.</p>
           </div>
           <div class="card">
-            <h3>AI-Orchestrated Engineering</h3>
-            <p>Multi-agent reviewer / implementer pipelines with mutation-proven test gates and ISO 26262 review lenses.</p>
+            <h3>Technical Leadership</h3>
+            <p>Architecture reviews, mentoring, test-driven development, documentation, and reusable engineering practices.</p>
           </div>
         </div>
       </section>
@@ -436,22 +442,11 @@
       <section id="achievements">
         <h2><span class="kicker" aria-hidden="true"></span>Selected Achievements</h2>
         <ul class="achievements">
-          <li><strong>Reproducible Concurrency Verification</strong> &mdash; Established the correctness of lock-free, fence-based synchronization by building instrumented torn-record detectors and fault-injection harnesses &mdash; catching a writer-writer memory-ordering race that two sound formal derivations and thread sanitizers had passed, then proving the fix (0 failures across 50,000 runs).</li>
-          <li><strong>Custom Memory Allocator</strong> &mdash; Designed a custom allocator that eliminates fragmentation and provides O(1) allocations, achieving deterministic, jitter-free performance in a mission-critical, real-time environment.</li>
-          <li><strong>Deterministic Shared-Memory IPC</strong> &mdash; Architected a low-latency single-writer/multi-reader shared-memory queue for real-time ADAS surround-view &mdash; lifecycle, integrity, timing and timestamped history; the design foreshadowed today's iceoryx2. <a href="iceoryx2-deterministic.html">Write-up &rarr;</a></li>
-          <li><strong>Source-Verified Bug Hunting</strong> &mdash; Routinely locate reproducible memory-safety and concurrency defects (buffer overflows, TOCTOU, use-after-free) deep inside large, undocumented third-party and vendor codebases &mdash; found by reproduction, not by reading.</li>
-          <li><strong>Patented Parking-Slot Detection</strong> &mdash; Architected the software of a camera-based parking-slot-marking detection algorithm, deployed in mass-production ADAS (patented).</li>
-          <li><strong>AI-Orchestrated Review Pipeline</strong> &mdash; Built and operate a 26-agent reviewer/implementer pipeline with mutation-proven test gates: every fix is proven by a test that fails on the defect and passes on the fix.</li>
-          <li><strong>C++ protobuf layer on nanopb</strong> &mdash; Added a C++ layer on top of nanopb for easier protocol-buffer integration in embedded projects.</li>
-        </ul>
-      </section>
-
-      <section id="bitcoin">
-        <h2><span class="kicker" aria-hidden="true"></span>Bitcoin &amp; Protocol Research</h2>
-        <ul class="achievements">
-          <li><strong>ChainCode Labs BOSS 2026</strong> &mdash; Selected participant; systems-level Bitcoin protocol research and open-source study.</li>
-          <li><strong>Light-Client Block Filter Research</strong> &mdash; Benchmarked BIP&nbsp;158 against Binary-Fuse filters across 50,000 mainnet blocks and 10 wallet scenarios: Fuse16 preserves zero false negatives while cutting client-side query CPU by 9&ndash;81&times; on desktop and 6&ndash;46&times; on a Raspberry&nbsp;Pi&nbsp;5, at bandwidth comparable to GCS. <a href="https://purszki.github.io/bitcoin_research_01/" target="_blank" rel="noopener">Read the write-up &rarr;</a></li>
-          <li><strong>Lightning &amp; wallet internals (C)</strong> &mdash; Implemented an HTLC route builder and a BOLT&nbsp;04 Sphinx onion builder; wrote custom-signet wallets (descriptor balance, 2-of-2 multisig spend via PSBT) and a UTXO coin-selection algorithm.</li>
+          <li><strong>Custom Memory Allocator</strong> &mdash; Designed a custom allocator that avoids fragmentation and provides O(1) allocation. It delivered deterministic performance without jitter in a mission-critical real-time system.</li>
+          <li><strong>Deterministic Shared-Memory IPC</strong> &mdash; Designed a low-latency, single-writer/multi-reader shared-memory queue for real-time ADAS surround view. The design covered lifecycle, data integrity, timing, and timestamped history, and anticipated concepts now used by iceoryx2.</li>
+          <li><strong>Patented Parking-Slot Detection</strong> &mdash; Designed the software architecture of a camera-based parking-slot-marking detection algorithm used in mass-production ADAS. The work contributed to a patent.</li>
+          <li><strong>C++ protobuf layer for nanopb</strong> &mdash; Added a C++ layer to nanopb to make protocol buffer integration easier in embedded projects.</li>
+          <li><strong>Light-Client Block Filter Research</strong> &mdash; Compared BIP&nbsp;158 and Binary-Fuse filters using 50,000 mainnet blocks and 10 wallet scenarios. Fuse16 had zero false negatives and reduced client-side query CPU by 9&ndash;81&times; on desktop and 6&ndash;46&times; on a Raspberry&nbsp;Pi&nbsp;5, with bandwidth similar to GCS.</li>
         </ul>
       </section>
 
@@ -468,18 +463,18 @@
           <div class="role">
             <p class="role-title">Algorithm Framework Expert</p>
             <ul>
-              <li>Developed a reusable algorithm framework enabling multiple teams to integrate memory pools, debugging/visualization, logging, and shared-memory I/O.</li>
-              <li>Provided technical leadership, mentoring junior engineers and ensuring best practices in concurrency and resource management.</li>
-              <li>Improved the team's efficiency by introducing test-driven development using google-test.</li>
+              <li>Developed a reusable algorithm framework used by multiple teams for memory pools, debugging and visualization, logging, and shared-memory I/O.</li>
+              <li>Provided technical leadership, mentored junior engineers, and introduced good practices for concurrency and resource management.</li>
+              <li>Improved team efficiency by introducing test-driven development with GoogleTest.</li>
             </ul>
           </div>
 
           <div class="role">
             <p class="role-title">Algorithm Embedded Lead &mdash; Parking Slot Marking Detection</p>
             <ul>
-              <li>Designed the SW architecture of the patented Parking Slot Marking Detection algorithm.</li>
-              <li>Played a major role in developing a package-manager-based build system employing semantic versioning and CI/CD for consistent, stable integration of multiple modules.</li>
-              <li>Enabled straightforward backward compatibility, reduced integration overhead, and streamlined release processes.</li>
+              <li>Designed the software architecture of the patented Parking Slot Marking Detection algorithm.</li>
+              <li>Helped develop a package-manager-based build system using semantic versioning and CI/CD for stable integration of multiple modules.</li>
+              <li>Made backward compatibility easier, reduced integration work, and simplified releases.</li>
             </ul>
           </div>
         </div>
@@ -494,15 +489,15 @@
           <div class="role">
             <p class="role-title">DSP Lead &mdash; Calibration and Scene Viewing Group</p>
             <ul>
-              <li>Designed the SW architecture of computer vision algorithms.</li>
-              <li>Contributed to process definition and code-reuse practices.</li>
+              <li>Designed the software architecture of computer vision algorithms.</li>
+              <li>Helped define development processes and code-reuse practices.</li>
             </ul>
           </div>
 
           <div class="role">
             <p class="role-title">Algorithm Integrator &mdash; Software Group</p>
             <ul>
-              <li>Integrated and maintained the automatic road-based camera calibration algorithm across customer projects.</li>
+              <li>Integrated and maintained an automatic road-based camera calibration algorithm across customer projects.</li>
               <li>Refactored and ported the algorithm from C to C++ as a reusable library optimized for TI VisionMid and OMAP platforms.</li>
             </ul>
           </div>
@@ -517,9 +512,9 @@
 
           <div class="role">
             <ul>
-              <li>Architected an algorithm development framework for object-tracker-based applications.</li>
+              <li>Designed an algorithm development framework for object-tracker-based applications.</li>
               <li>Developed computer vision algorithms: object tracker, background subtraction, camera calibration, color recognition, shadow filtering.</li>
-              <li>Traffic detector &mdash; statistical analysis of traffic flow and detection of suspicious (stopping, wrong-direction) vehicles.</li>
+              <li>Developed a traffic detector that used statistical traffic-flow analysis to identify stopped vehicles and vehicles moving in the wrong direction.</li>
             </ul>
           </div>
         </div>
@@ -528,24 +523,19 @@
       <section id="patents">
         <h2><span class="kicker" aria-hidden="true"></span>Patents</h2>
         <p>
-          Contributor to German Patent related to parking slot detection
+          Contributor to a German patent related to parking-slot detection
           (DE102019102561A1, &ldquo;Verfahren zur Erkennung einer Fahrbahnmarkierung&rdquo;).
         </p>
-      </section>
-
-      <section id="writing">
-        <h2><span class="kicker" aria-hidden="true"></span>Selected Writing &amp; Evidence</h2>
-        <ul>
-          <li><a href="https://purszki.github.io/bitcoin_research_01/" target="_blank" rel="noopener">Bitcoin Light-Client Block Filter Research</a> &mdash; BIP&nbsp;158 vs Binary-Fuse benchmark (ChainCode BOSS 2026).</li>
-          <li><a href="iceoryx2-deterministic.html">Deterministic software through zero-copy shared-memory queues</a> &mdash; the five faces of a real-time SWMR queue, foreshadowing iceoryx2.</li>
-        </ul>
       </section>
 
       <section id="footer-facts">
         <div class="facts">
           <div>
-            <h3>Education</h3>
-            <p>MSc. Electrical Engineer<br>Budapest University of Technology and Economics (BME)<br>2000 &ndash; 2005</p>
+            <h3>Education &amp; Professional Development</h3>
+            <ul>
+              <li>Chaincode Labs BOSS &mdash; selected participant, 2026</li>
+              <li>MSc in Electrical Engineering, Budapest University of Technology and Economics (BME), 2000&ndash;2005</li>
+            </ul>
           </div>
           <div>
             <h3>Languages</h3>
@@ -558,8 +548,7 @@
           <div>
             <h3>Other</h3>
             <ul>
-              <li>Father of two</li>
-              <li>Trad musician</li>
+              <li>Traditional musician</li>
               <li>Weekend sailor</li>
             </ul>
           </div>
@@ -570,26 +559,67 @@
   </main>
 
   <footer>
-    <p>&copy; Csaba Purszki &bull; <a class="email-link" data-u="ikzsrup.abasc" data-d="moc.liamg" href="#">email me</a></p>
+    <p>&copy; Csaba Purszki &bull; <a href="#" class="guard" data-type="email" data-u="ExhMARcDQkVARVcTXg==" data-d="EwRAEwNZV0IfQEQLXh8FAwsD">Show email</a></p>
   </footer>
 
   <script>
     (function () {
-      var rev = function (s) { return s.split('').reverse().join(''); };
-      var links = document.querySelectorAll('a.email-link[data-u][data-d]');
-      for (var i = 0; i < links.length; i++) {
-        (function (el) {
-          el.addEventListener('click', function (e) {
-            if (el.dataset.revealed === '1') return;
-            e.preventDefault();
-            var addr = rev(el.getAttribute('data-u')) + '@' + rev(el.getAttribute('data-d'));
-            el.textContent = addr;
-            el.setAttribute('href', 'mai' + 'lto:' + addr);
-            el.dataset.revealed = '1';
-            window.location.href = el.getAttribute('href');
-          });
-        })(links[i]);
+      var KEY = 'pk-cv-2026-x7';
+
+      var dec = function (b64) {
+        var bin = atob(b64), out = '';
+        for (var i = 0; i < bin.length; i++) {
+          out += String.fromCharCode(bin.charCodeAt(i) ^ KEY.charCodeAt(i % KEY.length));
+        }
+        return out;
+      };
+
+      // Render decoded text to a <canvas> image, styled like the surrounding text.
+      function makeCanvas(text, styleEl) {
+        var cs = window.getComputedStyle(styleEl);
+        var fontSize = parseFloat(cs.fontSize) || 15;
+        var font = (cs.fontWeight || '400') + ' ' + fontSize + 'px ' +
+                   (cs.fontFamily || '"Source Sans 3", sans-serif');
+        var color = cs.color || '#6a6257';
+        var dpr = window.devicePixelRatio || 1;
+        var pad = 1;
+
+        var cv = document.createElement('canvas');
+        cv.className = 'cimg';
+        cv.setAttribute('role', 'img');
+        var ctx = cv.getContext('2d');
+        ctx.font = font;
+        var w = Math.ceil(ctx.measureText(text).width) + pad * 2;
+        var h = Math.ceil(fontSize * 1.35);
+
+        cv.width = Math.round(w * dpr);
+        cv.height = Math.round(h * dpr);
+        cv.style.width = w + 'px';
+        cv.style.height = h + 'px';
+
+        ctx.scale(dpr, dpr);
+        ctx.font = font;
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = color;
+        ctx.fillText(text, pad, h / 2);
+        return cv;
       }
+
+      // JavaScript guard: nothing is revealed until the user clicks. No mailto/tel — reveal only.
+      function reveal(el) {
+        var text = el.getAttribute('data-type') === 'email'
+          ? dec(el.getAttribute('data-u')) + '@' + dec(el.getAttribute('data-d'))
+          : dec(el.getAttribute('data-p'));
+        var cv = makeCanvas(text, el.parentNode);
+        el.parentNode.replaceChild(cv, el);
+      }
+
+      document.addEventListener('click', function (e) {
+        var el = e.target.closest ? e.target.closest('a.guard') : null;
+        if (!el) return;
+        e.preventDefault();
+        reveal(el);
+      });
     })();
   </script>
 </body>
