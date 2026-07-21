@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Csaba Purszki — CV</title>
+<style>
+  @page { size: A4; margin: 16mm 18mm; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; color: #1a1a1a; font-size: 10.4pt; line-height: 1.5;
+    font-family: "Georgia", "Times New Roman", serif;
+  }
+  .name { font-size: 22pt; font-weight: 700; letter-spacing: 0.02em; text-align: center; margin: 0; }
+  .role { text-align: center; font-size: 11pt; margin: 3px 0 6px; font-variant: small-caps; letter-spacing: 0.08em; color: #333; }
+  .contact { text-align: center; font-size: 9pt; color: #333; border-top: 1px solid #999; border-bottom: 1px solid #999; padding: 5px 0; margin-bottom: 12px; }
+  .contact a { color: #1a1a1a; text-decoration: none; }
+  h2 {
+    font-size: 11pt; text-transform: uppercase; letter-spacing: 0.12em; margin: 14px 0 5px;
+    border-bottom: 1px solid #333; padding-bottom: 2px; font-weight: 700;
+  }
+  p { margin: 4px 0; }
+  ul { margin: 3px 0; padding-left: 17px; }
+  li { margin: 2px 0; }
+  .ach b, .job-title { font-weight: 700; }
+  .job { margin: 8px 0; break-inside: avoid; }
+  .job-head { display: flex; justify-content: space-between; align-items: baseline; }
+  .job-dates { font-style: italic; font-size: 9.2pt; white-space: nowrap; }
+  .job-place { font-style: italic; font-size: 9.2pt; color: #444; margin: 0 0 2px; }
+  .rt { font-weight: 700; font-size: 9.8pt; margin: 5px 0 0; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 0 22px; }
+  .inline b { font-weight: 700; }
+</style>
+</head>
+<body>
+  <p class="name">CSABA PURSZKI</p>
+  <p class="role">Senior C++ Systems Engineer</p>
+  <div class="contact">
+    Budapest, Hungary &nbsp;·&nbsp; +36 70 416 42 26 &nbsp;·&nbsp;
+    <a href="mailto:csaba.purszki@computer-vision.hu">csaba.purszki@computer-vision.hu</a><br>
+    <a href="https://purszki.github.io/csaba_blogs/">purszki.github.io/csaba_blogs</a> &nbsp;·&nbsp;
+    <a href="https://www.linkedin.com/in/csaba-purszki-b3384834/">linkedin.com/in/csaba-purszki</a> &nbsp;·&nbsp;
+    Computer Vision Kft (VAT HU25100145)
+  </div>
+
+  <h2>Summary</h2>
+  <p>Senior C++ systems engineer with over 20 years of experience in real-time, low-latency, and safety-critical software. My main technical areas are modern C++, concurrency, lock-free design, memory management, shared-memory IPC, and cross-platform architecture. I have designed reusable frameworks and system components for automotive ADAS products used in mass production. I am now applying this systems-level C++ expertise to Bitcoin protocol research and to new challenges in financial technology and distributed systems.</p>
+
+  <h2>Core Competencies</h2>
+  <div class="two">
+    <ul>
+      <li><b>Modern C++</b> — STL, RAII, templates, cache-aware optimization</li>
+      <li><b>Low-Latency &amp; Lock-Free</b> — atomics, memory ordering, real-time hot paths</li>
+      <li><b>Concurrency Verification</b> — reproducible race / memory-order tests</li>
+    </ul>
+    <ul>
+      <li><b>Performance Engineering</b> — profiling, custom allocators, O(1) allocation</li>
+      <li><b>Architecture &amp; Systems</b> — ABI compatibility, IPC, cross-platform builds</li>
+      <li><b>Technical Leadership</b> — reviews, mentoring, TDD, documentation</li>
+    </ul>
+  </div>
+
+  <h2>Selected Achievements</h2>
+  <ul class="ach">
+    <li><b>Custom Memory Allocator</b> — Designed a custom allocator that avoids fragmentation and provides O(1) allocation, delivering deterministic performance in a mission-critical real-time system.</li>
+    <li><b>Deterministic Shared-Memory IPC</b> — Designed a low-latency, single-writer/multi-reader shared-memory queue for real-time ADAS surround view; design parallels concepts later adopted by iceoryx2.</li>
+    <li><b>Patented Parking-Slot Detection</b> — Designed the software architecture of a camera-based parking-slot-marking detection algorithm used in mass-production ADAS; contributed to a patent.</li>
+    <li><b>C++ protobuf layer for nanopb</b> — Added a C++ layer to nanopb to make protocol-buffer integration easier in embedded projects.</li>
+    <li><b>Light-Client Block Filter Research</b> — Compared BIP&nbsp;158 and Binary-Fuse filters across 50,000 mainnet blocks and 10 wallet scenarios. Fuse16 kept zero false negatives while cutting client-side query CPU by 9–81× on desktop and 6–46× on a Raspberry&nbsp;Pi&nbsp;5, at bandwidth similar to GCS.</li>
+  </ul>
+
+  <h2 style="break-before: page; page-break-before: always;">Experience</h2>
+  <div class="job">
+    <div class="job-head"><span class="job-title">Valeo Vision Systems — Independent Contractor (Computer Vision Kft)</span><span class="job-dates">05/2014 – Present</span></div>
+    <div class="job-place">Budapest, Hungary · Ireland — Automotive / Computer Vision</div>
+    <p class="rt">Algorithm Framework Expert</p>
+    <ul>
+      <li>Developed a reusable algorithm framework used by multiple teams for memory pools, debugging and visualization, logging, and shared-memory I/O.</li>
+      <li>Provided technical leadership, mentored junior engineers, and introduced good practices for concurrency and resource management.</li>
+      <li>Improved team efficiency by introducing test-driven development with GoogleTest.</li>
+    </ul>
+    <p class="rt">Algorithm Embedded Lead — Parking Slot Marking Detection</p>
+    <ul>
+      <li>Designed the software architecture of the patented Parking Slot Marking Detection algorithm.</li>
+      <li>Helped develop a package-manager-based build system using semantic versioning and CI/CD for stable integration of multiple modules.</li>
+      <li>Made backward compatibility easier, reduced integration work, and simplified releases.</li>
+    </ul>
+  </div>
+  <div class="job">
+    <div class="job-head"><span class="job-title">Valeo Vision Systems — Software Engineer</span><span class="job-dates">05/2011 – 05/2014</span></div>
+    <div class="job-place">Tuam, Co. Galway, Ireland — Automotive / Computer Vision</div>
+    <p class="rt">DSP Lead — Calibration and Scene Viewing Group</p>
+    <ul>
+      <li>Designed the software architecture of computer vision algorithms.</li>
+      <li>Helped define development processes and code-reuse practices.</li>
+    </ul>
+    <p class="rt">Algorithm Integrator — Software Group</p>
+    <ul>
+      <li>Integrated and maintained an automatic road-based camera calibration algorithm across customer projects.</li>
+      <li>Refactored and ported the algorithm from C to C++ as a reusable library optimized for TI VisionMid and OMAP platforms.</li>
+    </ul>
+  </div>
+  <div class="job">
+    <div class="job-head"><span class="job-title">Intellio Zrt — Algorithm Developer</span><span class="job-dates">08/2005 – 04/2011</span></div>
+    <div class="job-place">Budapest, Hungary — Video Surveillance Systems</div>
+    <ul>
+      <li>Designed an algorithm development framework for object-tracker-based applications.</li>
+      <li>Developed computer vision algorithms: object tracker, background subtraction, camera calibration, color recognition, shadow filtering.</li>
+      <li>Developed a traffic detector that used statistical traffic-flow analysis to identify stopped vehicles and vehicles moving in the wrong direction.</li>
+    </ul>
+  </div>
+
+  <h2>Patents</h2>
+  <p>Contributor to a German patent related to parking-slot detection (DE102019102561A1, “Verfahren zur Erkennung einer Fahrbahnmarkierung”).</p>
+
+  <h2>Education, Languages &amp; Other</h2>
+  <ul>
+    <li><b>Education:</b> Chaincode Labs BOSS — selected participant, 2026; MSc in Electrical Engineering, BME, 2000–2005.</li>
+    <li><b>Languages:</b> Hungarian (native), English (fluent), German (basic).</li>
+    <li><b>Other:</b> Traditional musician · weekend sailor.</li>
+  </ul>
+</body>
+</html>
